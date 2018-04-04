@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B170E8C3-5D50-473C-B90D-FD18CE8B83DD}</ProjectGuid>
+    <ProjectGuid>{115432D6-79FF-4890-A0EF-A8B3D8D46FD4}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>DSA_Contest</RootNamespace>
-    <AssemblyName>DSA-Contest</AssemblyName>
+    <RootNamespace>StudentsOrder</RootNamespace>
+    <AssemblyName>StudentsOrder</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
