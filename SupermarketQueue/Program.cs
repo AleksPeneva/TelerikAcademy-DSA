@@ -1,18 +1,63 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace SupermarketQueue
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
+            StringBuilder output = new StringBuilder();
+            SingleLinkedList queue = new SingleLinkedList();
+            string input = Console.ReadLine();
+            while (input != "End")
+            {
+                List<string> command = input.Split().ToList();
+                switch (command[0])
+                {
+                    case "Append":
+                        InsertTail(queue, command[1], output);
+                        break;
+                    case "Insert":
+                        int position = int.Parse(command[1]);
+                        Insert(position, command[2], queue, output);
+                        break;
+                    case "Find":
+                        Find(command[1], queue, output);
+                        break;
+                    case "Serve":
+                        int count = int.Parse(command[1]);
+                        Serve(count, queue, output);
+                        break;
+                    case "End":
+                        break;
+                    default:
+                        break;
+                }
+                
+                input = Console.ReadLine();
+            }
+
+            Console.WriteLine(output);
         }
 
-        internal void Insert(int position, string name, SingleLinkedList queue)
+        internal static void Serve(int count, SingleLinkedList queue, StringBuilder output)
+        {
+
+        }
+
+        internal static void Find(string name, SingleLinkedList queue, StringBuilder output)
+        {
+
+        }
+
+        internal static void Insert(int position, string name, SingleLinkedList queue, StringBuilder output)
         {
             if (position == 0)
             {
-                InsertHead(position, name, queue);
+                InsertHead(position, name, queue, output);
             }
             else
             {
@@ -20,7 +65,7 @@ namespace SupermarketQueue
             }
         }
 
-        internal void InsertHead(int position, string name, SingleLinkedList queue)
+        internal static void InsertHead(int position, string name, SingleLinkedList queue, StringBuilder output)
         {
             Node newNode = new Node(name)
             {
@@ -30,7 +75,7 @@ namespace SupermarketQueue
             Console.WriteLine("OK");
         }
 
-        internal void InsertTail(SingleLinkedList queue, string name)
+        internal static void InsertTail(SingleLinkedList queue, string name, StringBuilder output)
         {
             Node newNode = new Node(name);
             if (queue.head == null)
@@ -42,7 +87,7 @@ namespace SupermarketQueue
             tail.Next = newNode;
         }
 
-        internal void InsertAt(int position, string name, SingleLinkedList list)
+        internal static void InsertAt(int position, string name, SingleLinkedList list, StringBuilder output)
         {
             Node newNode = new Node(name)
             {
@@ -52,7 +97,7 @@ namespace SupermarketQueue
             Console.WriteLine("OK");
         }
 
-        internal Node GetTail(SingleLinkedList queue)
+        internal static Node GetTail(SingleLinkedList queue)
         {
             Node temp = queue.head;
             while (temp.Next != null)
@@ -66,11 +111,10 @@ namespace SupermarketQueue
     internal class Node
     {
         private string name;
-        private Node next;
         public Node(string n)
         {
             this.name = n;
-            this.next = null;
+            this.Next = null;
         }
 
         public Node Next { get; set; }
