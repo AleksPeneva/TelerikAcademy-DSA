@@ -51,5 +51,32 @@ namespace SupermarketQueue
             output.AppendLine("OK");
         }
 
+        private static void Insert(int position, string name)
+        {
+            if (position < 0 || position > queue.Count)
+            {
+                output.AppendLine("Error");
+                return;
+            }
+
+            queue.Insert(position, name);
+            customers.Add(name);
+            output.AppendLine("OK");
+        }
+
+        private static void Find(string name)
+        {
+            int count = 0;
+            foreach (var customer in customers)
+            {
+                if (customer == name)
+                {
+                    count++;
+                }
+            }
+            output.AppendLine(count.ToString());
+        }
+
+
     }
 }
