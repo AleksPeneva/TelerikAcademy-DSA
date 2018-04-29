@@ -77,6 +77,18 @@ namespace SupermarketQueue
             output.AppendLine(count.ToString());
         }
 
+        private static void Serve(int count)
+        {
+            if (count > queue.Count)
+            {
+                output.AppendLine("Error");
+                return;
+            }
 
+            var served = queue.Take(count);
+            queue.RemoveRange(0, count);
+            customers.RemoveMany(served);
+            output.AppendLine(string.Join(" ", served));
+        }
     }
 }
