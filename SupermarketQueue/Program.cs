@@ -11,37 +11,43 @@ namespace SupermarketQueue
         private static StringBuilder output = new StringBuilder();
         private static Bag<string> customers = new Bag<string>();
         private static BigList<string> queue = new BigList<string>();
-        
+
         static void Main(string[] args)
         {
             string input = Console.ReadLine();
             while (input != "End")
             {
                 List<string> command = input.Split().ToList();
+                int position;
+                string name;
+                int count;
                 switch (command[0])
                 {
                     case "Append":
-                        
+                        name = command[1];
+                        Append(name);
                         break;
                     case "Insert":
-
+                        position = int.Parse(command[1]);
+                        name = command[2];
+                        Insert(position, name);
                         break;
                     case "Find":
-                        
+                        name = command[1];
+                        Find(name);
                         break;
                     case "Serve":
-
-                        break;
-                    case "End":
+                        count = int.Parse(command[1]);
+                        Serve(count);
                         break;
                     default:
                         break;
                 }
-                
+
                 input = Console.ReadLine();
             }
 
-            Console.WriteLine(output);
+            Console.Write(output);
         }
 
         private static void Append(string name)
@@ -66,15 +72,7 @@ namespace SupermarketQueue
 
         private static void Find(string name)
         {
-            int count = 0;
-            foreach (var customer in customers)
-            {
-                if (customer == name)
-                {
-                    count++;
-                }
-            }
-            output.AppendLine(count.ToString());
+            output.AppendLine(customers.NumberOfCopies(name).ToString());
         }
 
         private static void Serve(int count)
@@ -85,7 +83,7 @@ namespace SupermarketQueue
                 return;
             }
 
-            var served = queue.Take(count);
+            var served = queue.GetRange(0, count);
             queue.RemoveRange(0, count);
             customers.RemoveMany(served);
             output.AppendLine(string.Join(" ", served));
