@@ -8,10 +8,13 @@ namespace Passwords
     {
         static void Main(string[] args)
         {
-            List<string> input = Console.ReadLine().Split().ToList();
-            int length = int.Parse(input[0]);
-            string relations = input[1];
-            int k = int.Parse(input[2]);
+            //List<string> input = Console.ReadLine().Split().ToList();
+            //int length = int.Parse(input[0]);
+            //string relations = input[1];
+            //int k = int.Parse(input[2]);
+            int length = int.Parse(Console.ReadLine());
+            string relations = Console.ReadLine();
+            int k = int.Parse(Console.ReadLine());
             var output = new char[length];
             int[] typedDigits = new int[length];
             Hack(relations, length, k, 0, typedDigits, output);
