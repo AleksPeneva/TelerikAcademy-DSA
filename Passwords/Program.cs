@@ -32,7 +32,7 @@ namespace Passwords
             if (relations[index] == '<')
             {
                 digit = typedDigits[index] == 0 ? 10 : typedDigits[index];
-                for (int i = 0; i < length; i++)
+                for (int i = 1; i < digit; i++)
                 {
                     typedDigits[index] = i;
                     length = Hack(relations, length, k, index, typedDigits);
@@ -52,7 +52,7 @@ namespace Passwords
                 typedDigits[index] = 0;
                 length = Hack(relations, length, k, index + 1, typedDigits);
 
-                for (int i = index + 1; i < length; i++)
+                for (int i = digit + 1; i < 10; i++)
                 {
                     typedDigits[index] = i;
                     length = Hack(relations, length, k, index + 1, typedDigits);
