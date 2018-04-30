@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Passwords
 {
@@ -14,14 +10,23 @@ namespace Passwords
             string relations = Console.ReadLine();
             int k = int.Parse(Console.ReadLine());
             var output = new char[length];
-            Hack();
+            string keyboard = "1234567890";
+            Hack(relations, length, k, 0, keyboard);
 
             Console.WriteLine(output);
         }
 
-        public static void Hack()
+        public static int Hack(string relations, int length, int k, int index, string keyboard)
         {
+            if (relations[index] == '<')
+            {
 
+            }
+
+            if (relations[index] == '>')
+            {
+
+            }
         }
     }
 }
