@@ -21,9 +21,9 @@ namespace Passwords
 
         public static int Hack(string relations, int length, int k, int index, int[] typedDigits, char[] output)
         {
-            if (length == 0)
+            if (k == 0)
             {
-                return length;
+                return k;
             }
 
             if (index == 0)
@@ -33,18 +33,20 @@ namespace Passwords
                     typedDigits[0] = i;
                     length = Hack(relations, length, k, index + 1, typedDigits, output);
                 }
-                return length;
+                return k;
             }
 
             if (index == length)
             {
                 if (k == 0)
                 {
+                    k--;
                     for (int i = 0; i < length; i++)
                     {
                         output[i] = (char)typedDigits[i];
                     }
                 }
+                return k;
             }
 
             int digit;
@@ -58,7 +60,7 @@ namespace Passwords
                     length = Hack(relations, length, k, index, typedDigits, output);
                 }
 
-                return length;
+                return k;
             }
 
             if (relations[index - 1] == '>')
@@ -66,7 +68,7 @@ namespace Passwords
                 digit = typedDigits[index - 1];
                 if (digit == 0)
                 {
-                    return length;
+                    return k;
                 }
 
                 typedDigits[index] = 0;
@@ -78,7 +80,7 @@ namespace Passwords
                     length = Hack(relations, length, k, index + 1, typedDigits, output);
                 }
 
-                return length;
+                return k;
             }
 
             typedDigits[index] = typedDigits[index - 1];    // =
