@@ -43,7 +43,7 @@ namespace Passwords
                 {
                     for (int i = 0; i < length; i++)
                     {
-                        output[i] = (char)typedDigits[i];
+                        output[i] = (char)typedDigits[i];   // issue????
                     }
                 }
                 return k;
@@ -71,18 +71,18 @@ namespace Passwords
                 }
 
                 typedDigits[index] = 0;
-                length = Hack(relations, length, k, index + 1, typedDigits, output);
+                k = Hack(relations, length, k, index + 1, typedDigits, output);
 
                 for (int i = digit + 1; i < 10; i++)
                 {
                     typedDigits[index] = i;
-                    length = Hack(relations, length, k, index + 1, typedDigits, output);
+                    k = Hack(relations, length, k, index + 1, typedDigits, output);
                 }
 
                 return k;
             }
 
-            typedDigits[index] = typedDigits[index - 1];    // =
+            typedDigits[index] = typedDigits[index - 1];
             return Hack(relations, length, k, index + 1, typedDigits, output);
         }
     }
