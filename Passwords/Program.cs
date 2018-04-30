@@ -10,6 +10,18 @@ namespace Passwords
     {
         static void Main(string[] args)
         {
+            int length = int.Parse(Console.ReadLine());
+            string relations = Console.ReadLine();
+            int k = int.Parse(Console.ReadLine());
+            var output = new char[length];
+            Hack();
+
+            Console.WriteLine(output);
+        }
+
+        public static void Hack()
+        {
+
         }
     }
 }
