@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace GirlsGoneWild
 {
@@ -10,7 +11,7 @@ namespace GirlsGoneWild
         private static List<List<int>> combOfNumbers = new List<List<int>>();  // lists of number combinations
         private static List<List<char>> combOfLetters = new List<List<char>>();  // lists of letter combinations
         private static char[] letters;
-        private static SortedSet<string> output;
+        private static SortedSet<string> finalOutput;
 
         internal static void Main(string[] args)
         {
@@ -19,7 +20,10 @@ namespace GirlsGoneWild
             letters = Console.ReadLine().ToCharArray().OrderBy(l => l).ToArray();
             numberOfGirls = int.Parse(Console.ReadLine());
 
-            Combinations(numbers, 0, 0, comb => combOfNumbers.Add(new List<int>(comb)));
+            Combinations(numbers, 0, 0, comb =>
+            {
+                combOfNumbers.Add(new List<int>(comb));
+            });
             numbers = new int[letters.Length];
             Combinations(numbers, 0, 0, comb =>
             {
@@ -30,27 +34,40 @@ namespace GirlsGoneWild
                 }
                 combOfLetters.Add(curCombination);
             });
+
+            foreach (var numComb in combOfNumbers)
+            {
+                foreach (var letterComb in combOfLetters)
+                {
+                    RepeatingPermutations(letterComb, 0, 0, action =>
+                    {
+
+                    });
+                }
+            }
+
+            Console.Write(finalOutput);
         }
 
-        //private static void AddNumberCombinations(int[] arr)
-        //{
-        //    foreach (var item in arr)
-        //    {
-        //        combOfNumbers.Add(new List<int>(item));
-        //    }
-        //}
+        internal static void Combine(List<char> letters, List<int> numbers)
+        {
+            StringBuilder output = new StringBuilder();
 
-        //private static void AddLetterCombinations(int[] arr)
-        //{
-        //    List<char> curCombination = new List<char>();
-        //    for (int i = 0; i < arr.Length; i++)
-        //    {
-        //        curCombination.Add(letters[arr[i]]);
-        //    }
-        //    combOfLetters.Add(curCombination);
-        //}
+            for (int i = 0; i < letters.Count; i++)
+            {                
+                for (int j = 0; j < numberOfGirls; j++)
+                {
+                    output.Append(numbers[j]);
+                    output.Append(letters[i]);
+                    output.Append("-");
+                }
 
-        internal static void /*Number*/Combinations(int[] arr, int start, int index, Action<int[]> action)
+                finalOutput.Add(output.ToString().TrimEnd('-'));
+                output.Clear();
+            }
+        }
+
+        internal static void Combinations(int[] arr, int start, int index, Action<int[]> action)
         {
             if (index > numberOfGirls)
             {
@@ -65,26 +82,10 @@ namespace GirlsGoneWild
                 }
             }
         }
-
-        //internal static void LetterCombinations(int[] arr, int start, int index)
-        //{
-        //    if (index > numberOfGirls)
-        //    {
-        //        AddLetterCombinations(arr);
-        //    }
-        //    else
-        //    {
-        //        for (int i = start; i < numberOfGirls; i++)
-        //        {
-        //            arr[index] = i;
-        //            LetterCombinations(arr, index + 1, i + 1);
-        //        }
-        //    }
-        //}
-
-        internal static void RepeatingPermutations(int[] arr, int start, int n)         // letters, not numbers
+        
+        internal static void RepeatingPermutations(List<char> arr, int start, int n, Action<List<char>> action)
         {
-            
+            action(arr);
 
             for (int left = n - 2; left >= start; left--)
             {
@@ -92,11 +93,11 @@ namespace GirlsGoneWild
                 {
                     if (arr[left] != arr[right])
                     {
-                        int temp = arr[left];   //swap
+                        char temp = arr[left];   //swap
                         arr[left] = arr[right];
                         arr[right] = temp;
                         
-                        RepeatingPermutations(arr, left + 1, n);
+                        RepeatingPermutations(arr, left + 1, n, action);
                     }
                 }
                 int first = arr[left];
