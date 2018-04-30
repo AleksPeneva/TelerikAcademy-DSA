@@ -43,7 +43,7 @@ namespace Passwords
                 {
                     for (int i = 0; i < length; i++)
                     {
-                        output[i] = (char)typedDigits[i];   // issue????
+                        output[i] = (char)(typedDigits[i] + '0');   // issue????
                     }
                 }
                 return k;
