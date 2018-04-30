@@ -14,18 +14,28 @@ namespace Passwords
             int k = int.Parse(input[2]);
             var output = new char[length];
             int[] typedDigits = new int[length];
-            Hack(relations, length, k, 0, typedDigits);
+            Hack(relations, length, k, 0, typedDigits, output);
 
             Console.WriteLine(output);
         }
 
-        public static int Hack(string relations, int length, int k, int index, int[] typedDigits)
+        public static int Hack(string relations, int length, int k, int index, int[] typedDigits, char[] output)
         {
             if (length == 0)
             {
                 return length;
             }
 
+            if (index == 0)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    typedDigits[0] = i;
+                    length = Hack(relations, length, k, index + 1, typedDigits, output);
+                }
+
+                return length;
+            }
 
             int digit;
             
@@ -35,7 +45,7 @@ namespace Passwords
                 for (int i = 1; i < digit; i++)
                 {
                     typedDigits[index] = i;
-                    length = Hack(relations, length, k, index, typedDigits);
+                    length = Hack(relations, length, k, index, typedDigits, output);
                 }
 
                 return length;
@@ -50,18 +60,19 @@ namespace Passwords
                 }
 
                 typedDigits[index] = 0;
-                length = Hack(relations, length, k, index + 1, typedDigits);
+                length = Hack(relations, length, k, index + 1, typedDigits, output);
 
                 for (int i = digit + 1; i < 10; i++)
                 {
                     typedDigits[index] = i;
-                    length = Hack(relations, length, k, index + 1, typedDigits);
+                    length = Hack(relations, length, k, index + 1, typedDigits, output);
                 }
 
                 return length;
             }
-            
-            return Hack(relations, length, k, index + 1, typedDigits);
+
+            typedDigits[index] = typedDigits[index - 1];    // =
+            return Hack(relations, length, k, index + 1, typedDigits, output);
         }
     }
 }
