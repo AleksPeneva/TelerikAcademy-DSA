@@ -57,7 +57,7 @@ namespace Passwords
                 for (int i = 1; i < digit; i++)
                 {
                     typedDigits[index] = i;
-                    length = Hack(relations, length, k, index, typedDigits, output);
+                    k = Hack(relations, length, k, index + 1, typedDigits, output);
                 }
                 return k;
             }
