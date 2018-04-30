@@ -32,8 +32,25 @@ namespace Passwords
 
             if (relations[index] == '>')
             {
+                index = keyboard[index];
+                if (index == 0)
+                {
+                    return length;
+                }
 
+                keyboard[index] = 0;
+                length = Hack(relations, length, k, index + 1, keyboard);
+
+                for (int i = index + 1; i < length; i++)
+                {
+                    keyboard[index] = i;
+                    length = Hack(relations, length, k, index + 1, keyboard);
+                }
+
+                return length;
             }
+            
+            return Hack(relations, length, k, index + 1, keyboard);
         }
     }
 }
