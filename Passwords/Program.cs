@@ -33,28 +33,38 @@ namespace Passwords
                     typedDigits[0] = i;
                     length = Hack(relations, length, k, index + 1, typedDigits, output);
                 }
-
                 return length;
+            }
+
+            if (index == length)
+            {
+                if (k == 0)
+                {
+                    for (int i = 0; i < length; i++)
+                    {
+                        output[i] = (char)typedDigits[i];
+                    }
+                }
             }
 
             int digit;
             
-            if (relations[index] == '<')
+            if (relations[index - 1] == '<')
             {
-                digit = typedDigits[index] == 0 ? 10 : typedDigits[index];
+                digit = typedDigits[index - 1] == 0 ? 10 : typedDigits[index - 1];
                 for (int i = 1; i < digit; i++)
                 {
-                    typedDigits[index] = i;
+                    typedDigits[index - 1] = i;
                     length = Hack(relations, length, k, index, typedDigits, output);
                 }
 
                 return length;
             }
 
-            if (relations[index] == '>')
+            if (relations[index - 1] == '>')
             {
-                digit = typedDigits[index];
-                if (index == 0)
+                digit = typedDigits[index - 1];
+                if (digit == 0)
                 {
                     return length;
                 }
