@@ -21,6 +21,12 @@ namespace Passwords
 
         public static int Hack(string relations, int length, int k, int index, int[] typedDigits)
         {
+            if (length == 0)
+            {
+                return length;
+            }
+
+
             int digit;
             
             if (relations[index] == '<')
