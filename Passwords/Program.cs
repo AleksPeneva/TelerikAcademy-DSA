@@ -10,21 +10,26 @@ namespace Passwords
             string relations = Console.ReadLine();
             int k = int.Parse(Console.ReadLine());
             var output = new char[length];
-            int[] keyboard = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
-            Hack(relations, length, k, 0, keyboard);
+            int[] typedDigits = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+            Hack(relations, length, k, 0, typedDigits);
 
             Console.WriteLine(output);
         }
 
-        public static int Hack(string relations, int length, int k, int index, int[] keyboard)
+        public static int Hack(string relations, int length, int k, int index, int[] typedDigits)
         {
+            if (relations[index] == '=')
+            {
+
+            }
+
             if (relations[index] == '<')
             {
-                index = keyboard[index] == 0 ? 10 : keyboard[index];
+                index = typedDigits[index] == 0 ? 10 : typedDigits[index];
                 for (int i = 0; i < length; i++)
                 {
-                    keyboard[index] = i;
-                    length = Hack(relations, length, k, index, keyboard);
+                    typedDigits[index] = i;
+                    length = Hack(relations, length, k, index, typedDigits);
                 }
 
                 return length;
@@ -32,25 +37,25 @@ namespace Passwords
 
             if (relations[index] == '>')
             {
-                index = keyboard[index];
+                index = typedDigits[index];
                 if (index == 0)
                 {
                     return length;
                 }
 
-                keyboard[index] = 0;
-                length = Hack(relations, length, k, index + 1, keyboard);
+                typedDigits[index] = 0;
+                length = Hack(relations, length, k, index + 1, typedDigits);
 
                 for (int i = index + 1; i < length; i++)
                 {
-                    keyboard[index] = i;
-                    length = Hack(relations, length, k, index + 1, keyboard);
+                    typedDigits[index] = i;
+                    length = Hack(relations, length, k, index + 1, typedDigits);
                 }
 
                 return length;
             }
             
-            return Hack(relations, length, k, index + 1, keyboard);
+            return Hack(relations, length, k, index + 1, typedDigits);
         }
     }
 }
