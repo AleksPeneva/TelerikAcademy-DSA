@@ -31,16 +31,16 @@ namespace Passwords
                 for (int i = 0; i < 10; i++)
                 {
                     typedDigits[0] = i;
-                    length = Hack(relations, length, k, index + 1, typedDigits, output);
+                    k = Hack(relations, length, k, 1, typedDigits, output);
                 }
                 return k;
             }
 
             if (index == length)
             {
+                k--;
                 if (k == 0)
                 {
-                    k--;
                     for (int i = 0; i < length; i++)
                     {
                         output[i] = (char)typedDigits[i];
@@ -53,13 +53,12 @@ namespace Passwords
             
             if (relations[index - 1] == '<')
             {
-                digit = typedDigits[index - 1] == 0 ? 10 : typedDigits[index - 1];
+                digit = (typedDigits[index - 1] == 0) ? 10 : typedDigits[index - 1];
                 for (int i = 1; i < digit; i++)
                 {
-                    typedDigits[index - 1] = i;
+                    typedDigits[index] = i;
                     length = Hack(relations, length, k, index, typedDigits, output);
                 }
-
                 return k;
             }
 
