@@ -38,7 +38,18 @@ namespace ChessHorse
 
 		private static void BFS()
 		{
-			
+			Queue<int[]> cellsToTraverseFrom = new Queue<int[]>();
+			cellsToTraverseFrom.Enqueue(
+				new int[]
+				{
+					startRow, startCol
+				});
+			matrix[startRow, startCol] = 1;	//just at start, dw
+		}
+
+		private static bool FilledOutputCol()
+		{
+
 		}
 	}
 }
