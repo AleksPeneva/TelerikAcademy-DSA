@@ -16,6 +16,7 @@ namespace StudentsOrder
 
 			List<string> names = Console.ReadLine().Split().ToList();
 
+			var seatingArrangement = new Dictionary<string, LinkedListNode<string>>();
 
         }
     }
