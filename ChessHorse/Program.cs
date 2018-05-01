@@ -82,7 +82,7 @@ namespace ChessHorse
 
 		private static bool ValidateCell(int row, int col)
 		{
-			bool isValid = (row > -1 && row < matrix.GetLength(0)) && (col > -1 && col < matrix.GetLength(1) && (matrix[row, col] != -1));
+			bool isValid = (row > -1 && row < rows) && (col > -1 && col < cols);
 			return isValid;
 		}
 	}
