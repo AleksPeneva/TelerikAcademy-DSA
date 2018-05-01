@@ -12,10 +12,14 @@ namespace Portals
 		static void Main(string[] args)
         {
 			int[] startPos = Console.ReadLine().Split().Select(int.Parse).ToArray();
+
 			int[] size = Console.ReadLine().Split().Select(int.Parse).ToArray();
 			int rows = size[0];
 			int cols = size[1];
 			FillMatrix(rows, cols);
+
+			int startRow = startPos[0];
+			int startCol = startPos[0];
 		}
 
 		private static void FillMatrix(int rows, int cols)
@@ -35,5 +39,17 @@ namespace Portals
 				}
 			}
 		}
-    }
+
+		private static void FindMaxMight(int row, int col)
+		{
+			int might = matrix[row, col];
+
+		}
+
+		private static bool ValidateCell(int row, int col)
+		{
+			bool isValid = (row > -1 && row < matrix.GetLength(0)) && (col > -1 && col < matrix.GetLength(1));
+			return isValid;
+		}
+	}
 }
