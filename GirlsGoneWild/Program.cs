@@ -42,7 +42,7 @@ namespace GirlsGoneWild
 			if (elementsCount == combo.Length)
 			{
 				string perm = string.Join("-", combo);
-				if (output.Contains(perm))
+				if (!output.Contains(perm))
 				{
 					output.Add(perm);
 				}
@@ -61,7 +61,8 @@ namespace GirlsGoneWild
 					string permElement = $"{i}{letters[j]}";
 					combo[elementsCount] = permElement;
 					letterRepetitions[letters[j]]--;
-					Permutations(j + 1, elementsCount + 1);
+					Permutations(i + 1, elementsCount + 1);
+					letterRepetitions[letters[j]]++;
 				}
 			}
 		}
