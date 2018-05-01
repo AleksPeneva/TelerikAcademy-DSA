@@ -69,7 +69,7 @@ namespace ChessHorse
 
 					if (ValidateCell(rowMove, colMove))
 					{
-						matrix[rowMove, colMove] = matrix[0, 1] + 1;
+						matrix[rowMove, colMove] = matrix[cell[0], cell[1]] + 1;
 						cellsToTraverseFrom.Enqueue(
 							new int[]
 							{
