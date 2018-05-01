@@ -13,8 +13,8 @@ namespace ChessHorse
 		private static int[] outputCol;
 		private static int filledOutputColCells = 0;
 
-		private static int[] rowMovement = { -2, -2, -1, -1, +1, +1, +2, +2 };
-		private static int[] colMovement = { -1, +1, -2, +2, -2, +2, -1, +1 };
+		private static int[] rowMovement = { -2, -2, -1, -1, 1, 1, 2, 2 };
+		private static int[] colMovement = { -1, 1, -2, 2, -2, 2, -1, 1 };
 
 		static void Main(string[] args)
 		{
