@@ -35,14 +35,26 @@ namespace GirlsGoneWild
 			}
 		}
 
-		private static void Permutations(int number, int elements)
+		private static void Permutations(int number, int elementsCount)
 		{
-			if (elements == combo.Length)
+			if (elementsCount == combo.Length)
 			{
 				string perm = string.Join("-", combo);
 				if (output.Contains(perm))
 				{
 					output.Add(perm);
+				}
+			}
+
+			for (int i = number; i < numbers; i++)
+			{
+				for (int j = 0; j < letters.Length; j++)
+				{
+
+					string permElement = $"{i}{letters[j]}";
+					combo[elementsCount] = permElement;
+					letterRepetitions[letters[i]]--;
+					Permutations(j + 1, elementsCount + 1);
 				}
 			}
 		}
