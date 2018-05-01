@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentsOrder
 {
-    class Program
+	class Program
     {
 		private static List<string> names;
 		private static int studentsCnt;
 		private static int changesCnt;
-		private static LinkedList<string> students;
+		private static LinkedList<string> students = new LinkedList<string>();
 		private static Dictionary<string, LinkedListNode<string>> sittingArrangements;
 
 		static void Main(string[] args)
@@ -23,6 +21,12 @@ namespace StudentsOrder
 
 			InitialSittingArrangement();
 			ChangingArrangements();
+			PrintOutput();
+		}
+
+		private static void PrintOutput()
+		{
+			Console.WriteLine(string.Join(" ", students));
 		}
 
 		private static void InitialSittingArrangement()
@@ -41,7 +45,15 @@ namespace StudentsOrder
 		{
 			for (int i = 0; i < changesCnt; i++)
 			{
+				List<string> input = Console.ReadLine().Split().ToList();
+				string leftStudentName = input[0];
+				string rightStudentName = input[1];
 
+				LinkedListNode<string> leftStudent = sittingArrangements[leftStudentName];
+				LinkedListNode<string> rightStudent = sittingArrangements[rightStudentName];
+
+				students.Remove(leftStudent);
+				students.AddBefore(rightStudent, sittingArrangements[leftStudentName]);
 			}
 		}
     }
