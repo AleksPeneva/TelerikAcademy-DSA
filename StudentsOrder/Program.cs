@@ -11,7 +11,8 @@ namespace StudentsOrder
 		private static List<string> names;
 		private static int studentsCnt;
 		private static int changesCnt;
-		private static Dictionary<string, LinkedListNode<string>> sittingArrangement;
+		private static LinkedList<string> students;
+		private static Dictionary<string, LinkedListNode<string>> sittingArrangements;
 
 		static void Main(string[] args)
         {
@@ -21,16 +22,26 @@ namespace StudentsOrder
 			names = Console.ReadLine().Split().ToList();
 
 			InitialSittingArrangement();
-
+			ChangingArrangements();
 		}
 
 		private static void InitialSittingArrangement()
 		{
-			sittingArrangement = new Dictionary<string, LinkedListNode<string>>();
+			sittingArrangements = new Dictionary<string, LinkedListNode<string>>();
 
 			for (int i = 0; i < studentsCnt; i++)
 			{
-				var arrangement = new LinkedListNode<string>(names[i]);
+				var student = new LinkedListNode<string>(names[i]);
+				students.AddLast(student);
+				sittingArrangements.Add(names[i], student);
+			}
+		}
+
+		private static void ChangingArrangements()
+		{
+			for (int i = 0; i < changesCnt; i++)
+			{
+
 			}
 		}
     }
