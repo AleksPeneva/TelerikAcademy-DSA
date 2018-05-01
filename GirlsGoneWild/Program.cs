@@ -17,6 +17,8 @@ namespace GirlsGoneWild
 		{
 			OrganizeData();
 			Permutations(0, 0);
+			Console.WriteLine(output.Count());
+			Console.WriteLine(string.Join(Environment.NewLine, output));
 		}
 
 		private static void OrganizeData()
@@ -44,6 +46,7 @@ namespace GirlsGoneWild
 				{
 					output.Add(perm);
 				}
+				return;
 			}
 
 			for (int i = number; i < numbers; i++)
