@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace ChessHorse
 {
@@ -33,10 +34,12 @@ namespace ChessHorse
 
 		private static void PrintOutput(int[] outputCol)
 		{
+			StringBuilder output = new StringBuilder();
 			for (int i = 0; i < outputCol.Length; i++)
 			{
-				Console.WriteLine(outputCol[i]);
+				output.AppendLine(outputCol[i].ToString());
 			}
+			Console.Write(output);
 		}
 
 		private static void BFS()
