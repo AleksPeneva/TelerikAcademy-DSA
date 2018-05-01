@@ -9,7 +9,7 @@ namespace Portals
 		private static int[,] matrix;
 		private static bool[,] visited;
 		private static int maxMight;
-		private static List<int> mights = new List<int>();
+		private static Stack<int> mights = new Stack<int>();
 
 		static void Main(string[] args)
         {
@@ -59,7 +59,7 @@ namespace Portals
 				return;
 			}
 
-			mights.Add(might);
+			mights.Push(might);
 
 			visited[row, col] = true;
 
@@ -84,6 +84,7 @@ namespace Portals
 			
 			int mightsSum = mights.Sum();
 			maxMight = maxMight > mightsSum ? maxMight : mightsSum;
+			mights.Pop();
 		}
 
 		private static bool ValidateCell(int row, int col)
@@ -94,9 +95,9 @@ namespace Portals
 
 		private static bool AbleToTeleport(int row, int col, int might)
 		{
-			bool able = ValidateCell(row + might, col) &&
-						(ValidateCell(row - might, col) && 
-						ValidateCell(row, col + might) && 
+			bool able = ValidateCell(row + might, col) ||
+						(ValidateCell(row - might, col) || 
+						ValidateCell(row, col + might) ||
 						ValidateCell(row, col - might));
 
 			return able;
