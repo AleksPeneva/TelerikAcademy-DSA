@@ -82,7 +82,7 @@ namespace ChessHorse
 
 		private static bool ValidateCell(int row, int col)
 		{
-			bool isValid = (row > -1 && row < rows) && (col > -1 && col < cols);
+			bool isValid = (row > -1 && row < rows) && (col > -1 && col < cols) && (matrix[row, col] == 0);
 			return isValid;
 		}
 	}
