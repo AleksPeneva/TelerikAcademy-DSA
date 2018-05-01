@@ -44,12 +44,47 @@ namespace Portals
 		{
 			int might = matrix[row, col];
 
+			if (!AbleToTeleport(row, col, might))
+			{
+				return;
+			}
+
+			maxMight = (maxMight > might) ? maxMight : might;
+
+			visited[row, col] = true;
+
+			if (ValidateCell(row + might, col))
+			{
+				FindMaxMight(row + might, col);
+			}
+			if (ValidateCell(row - might, col))
+			{
+				FindMaxMight(row - might, col);
+			}
+			if (ValidateCell(row, col + might))
+			{
+				FindMaxMight(row, col + might);
+			}
+			if (ValidateCell(row, col - might))
+			{
+				FindMaxMight(row, col - might);
+			}
 		}
 
 		private static bool ValidateCell(int row, int col)
 		{
 			bool isValid = (row > -1 && row < matrix.GetLength(0)) && (col > -1 && col < matrix.GetLength(1));
 			return isValid;
+		}
+
+		private static bool AbleToTeleport(int row, int col, int might)
+		{
+			bool able = ValidateCell(row + might, col) ||
+						(ValidateCell(row - might, col) || 
+						ValidateCell(row, col + might) || 
+						ValidateCell(row, col - might));
+
+			return able;
 		}
 	}
 }
