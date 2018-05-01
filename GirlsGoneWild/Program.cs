@@ -53,6 +53,10 @@ namespace GirlsGoneWild
 			{
 				for (int j = 0; j < letters.Length; j++)
 				{
+					if (letterRepetitions[letters[j]] == 0)
+					{
+						continue;
+					}
 
 					string permElement = $"{i}{letters[j]}";
 					combo[elementsCount] = permElement;
