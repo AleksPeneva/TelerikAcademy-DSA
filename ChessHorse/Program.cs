@@ -11,7 +11,7 @@ namespace ChessHorse
 		private static int startRow;
 		private static int startCol;
 		private static int[] outputCol;
-		
+		private static int filledOutputColCells = 0;
 
         static void Main(string[] args)
         {
@@ -44,12 +44,18 @@ namespace ChessHorse
 				{
 					startRow, startCol
 				});
-			matrix[startRow, startCol] = 1;	//just at start, dw
-		}
+			matrix[startRow, startCol] = 1; //just at start, dw
 
-		private static bool FilledOutputCol()
-		{
+			while ((cellsToTraverseFrom.Count != 0) && ())
+			{
+				int[] cell = cellsToTraverseFrom.Dequeue();
 
+				if (cell[0] == cols/2)
+				{
+					filledOutputColCells++;
+					outputCol[0] = matrix[0, 1];
+				}
+			}
 		}
 	}
 }
