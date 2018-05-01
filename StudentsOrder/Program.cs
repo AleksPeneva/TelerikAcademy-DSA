@@ -8,16 +8,30 @@ namespace StudentsOrder
 {
     class Program
     {
-        static void Main(string[] args)
+		private static List<string> names;
+		private static int studentsCnt;
+		private static int changesCnt;
+		private static Dictionary<string, LinkedListNode<string>> sittingArrangement;
+
+		static void Main(string[] args)
         {
 			List<int> inputNumbers = Console.ReadLine().Split().Select(int.Parse).ToList();
-			int studentsCnt = inputNumbers[0];
-			int changesCnt = inputNumbers[1];
+			studentsCnt = inputNumbers[0];
+			changesCnt = inputNumbers[1];
+			names = Console.ReadLine().Split().ToList();
 
-			List<string> names = Console.ReadLine().Split().ToList();
+			InitialSittingArrangement();
 
-			var seatingArrangement = new Dictionary<string, LinkedListNode<string>>();
+		}
 
-        }
+		private static void InitialSittingArrangement()
+		{
+			sittingArrangement = new Dictionary<string, LinkedListNode<string>>();
+
+			for (int i = 0; i < studentsCnt; i++)
+			{
+				var arrangement = new LinkedListNode<string>(names[i]);
+			}
+		}
     }
 }
