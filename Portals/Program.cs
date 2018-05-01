@@ -9,7 +9,7 @@ namespace Portals
 		private static int[,] matrix;
 		private static bool[,] visited;
 		private static int maxMight;
-		private static List<int> mights;
+		private static List<int> mights = new List<int>();
 
 		static void Main(string[] args)
         {
@@ -22,6 +22,7 @@ namespace Portals
 
 			int startRow = startPos[0];
 			int startCol = startPos[0];
+			FindMaxMight(startRow, startCol);
 
 			Console.WriteLine(maxMight);
 		}
@@ -36,7 +37,7 @@ namespace Portals
 
 				for (int col = 0; col < cols; col++)
 				{
-					if (!int.TryParse(curRow[col], out matrix[row, col]))
+					if (!int.TryParse(curRow[col], out matrix[row, col]))	// #
 					{
 						matrix[row, col] = -1;
 					}
@@ -73,6 +74,8 @@ namespace Portals
 			{
 				FindMaxMight(row, col - might);
 			}
+
+			visited[row, col] = false;
 			
 			int mightsSum = mights.Sum();
 			maxMight = maxMight > mightsSum ? maxMight : mightsSum;
@@ -86,9 +89,9 @@ namespace Portals
 
 		private static bool AbleToTeleport(int row, int col, int might)
 		{
-			bool able = ValidateCell(row + might, col) ||
-						(ValidateCell(row - might, col) || 
-						ValidateCell(row, col + might) || 
+			bool able = ValidateCell(row + might, col) &&
+						(ValidateCell(row - might, col) && 
+						ValidateCell(row, col + might) && 
 						ValidateCell(row, col - might));
 
 			return able;
