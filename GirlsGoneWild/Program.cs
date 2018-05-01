@@ -11,7 +11,7 @@ namespace GirlsGoneWild
         private static List<List<int>> combOfNumbers = new List<List<int>>();  // lists of number combinations
         private static List<List<char>> combOfLetters = new List<List<char>>();  // lists of letter combinations
         private static char[] letters;
-        private static SortedSet<string> finalOutput;
+        private static SortedSet<string> finalOutput = new SortedSet<string>();
 
         internal static void Main(string[] args)
         {
@@ -39,37 +39,41 @@ namespace GirlsGoneWild
             {
                 foreach (var letterComb in combOfLetters)
                 {
-                    RepeatingPermutations(letterComb, 0, 0, action =>
+                    List<char> newLetters = new List<char>(letterComb);
+                    RepeatingPermutations(newLetters, 0, newLetters.Count, action =>
                     {
-
+                        Combine(action, numComb);
                     });
                 }
             }
 
-            Console.Write(finalOutput);
+            StringBuilder result = new StringBuilder();
+            result.AppendLine(finalOutput.Count.ToString());
+            foreach (var item in finalOutput)
+            {
+                result.AppendLine(item);
+            }
+
+            Console.WriteLine(result.ToString().Trim());
         }
 
         internal static void Combine(List<char> letters, List<int> numbers)
         {
             StringBuilder output = new StringBuilder();
 
-            for (int i = 0; i < letters.Count; i++)
-            {                
-                for (int j = 0; j < numberOfGirls; j++)
-                {
-                    output.Append(numbers[j]);
-                    output.Append(letters[i]);
-                    output.Append("-");
-                }
-
-                finalOutput.Add(output.ToString().TrimEnd('-'));
-                output.Clear();
+            for (int i = 0; i < letters.Count; i++) 
+            {     
+                output.Append(numbers[i]);
+                output.Append(letters[i]);
+                output.Append('-');
             }
+            output.Length--;
+            finalOutput.Add(output.ToString());
         }
 
         internal static void Combinations(int[] arr, int start, int index, Action<int[]> action)
         {
-            if (index > numberOfGirls)
+            if (index >= numberOfGirls)
             {
                 action(arr);
             }
@@ -100,7 +104,7 @@ namespace GirlsGoneWild
                         RepeatingPermutations(arr, left + 1, n, action);
                     }
                 }
-                int first = arr[left];
+                var first = arr[left];
                 for (int i = left; i < n - 1; i++)
                 {
                     arr[i] = arr[i + 1];
