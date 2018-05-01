@@ -73,7 +73,7 @@ namespace ChessHorse
 						cellsToTraverseFrom.Enqueue(
 							new int[]
 							{
-								startRow, startCol
+								rowMove, colMove
 							});
 					}
 				}
