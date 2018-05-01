@@ -8,7 +8,7 @@ namespace Portals
     {
 		private static int[,] matrix;
 		private static bool[,] visited;
-		private static int maxMight;
+		private static int maxMight = 0;
 		private static Stack<int> mights = new Stack<int>();
 
 		static void Main(string[] args)
@@ -21,7 +21,7 @@ namespace Portals
 			FillMatrix(rows, cols);
 
 			int startRow = startPos[0];
-			int startCol = startPos[0];
+			int startCol = startPos[1];
 			FindMaxMight(startRow, startCol);
 
 			Console.WriteLine(maxMight);
@@ -83,13 +83,13 @@ namespace Portals
 			visited[row, col] = false;
 			
 			int mightsSum = mights.Sum();
-			maxMight = maxMight > mightsSum ? maxMight : mightsSum;
+			maxMight = (maxMight > mightsSum) ? maxMight : mightsSum;
 			mights.Pop();
 		}
 
 		private static bool ValidateCell(int row, int col)
 		{
-			bool isValid = (row > -1 && row < matrix.GetLength(0)) && (col > -1 && col < matrix.GetLength(1));
+			bool isValid = (row > -1 && row < matrix.GetLength(0)) && (col > -1 && col < matrix.GetLength(1) && (matrix[row, col] != -1));
 			return isValid;
 		}
 
