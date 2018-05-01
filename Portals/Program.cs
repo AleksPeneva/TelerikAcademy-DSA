@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Portals
@@ -8,6 +9,7 @@ namespace Portals
 		private static int[,] matrix;
 		private static bool[,] visited;
 		private static int maxMight;
+		private static List<int> mights;
 
 		static void Main(string[] args)
         {
@@ -20,6 +22,8 @@ namespace Portals
 
 			int startRow = startPos[0];
 			int startCol = startPos[0];
+
+			Console.WriteLine(maxMight);
 		}
 
 		private static void FillMatrix(int rows, int cols)
@@ -49,7 +53,7 @@ namespace Portals
 				return;
 			}
 
-			maxMight = (maxMight > might) ? maxMight : might;
+			mights.Add(might);
 
 			visited[row, col] = true;
 
@@ -69,6 +73,9 @@ namespace Portals
 			{
 				FindMaxMight(row, col - might);
 			}
+			
+			int mightsSum = mights.Sum();
+			maxMight = maxMight > mightsSum ? maxMight : mightsSum;
 		}
 
 		private static bool ValidateCell(int row, int col)
