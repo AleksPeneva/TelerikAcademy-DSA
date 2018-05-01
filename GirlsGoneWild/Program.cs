@@ -11,10 +11,12 @@ namespace GirlsGoneWild
 		private static int girlsCount;
 		private static string[] combo;
 		private static Dictionary<char, int> letterRepetitions = new Dictionary<char, int>();
+		private static List<string> output = new List<string>();
 
 		static void Main(string[] args)
 		{
 			OrganizeData();
+			Permutations(0, 0);
 		}
 
 		private static void OrganizeData()
@@ -30,6 +32,18 @@ namespace GirlsGoneWild
 					letterRepetitions.Add(letter, 0);
 				}
 				letterRepetitions[letter]++;
+			}
+		}
+
+		private static void Permutations(int number, int elements)
+		{
+			if (elements == combo.Length)
+			{
+				string perm = string.Join("-", combo);
+				if (output.Contains(perm))
+				{
+					output.Add(perm);
+				}
 			}
 		}
 	}
