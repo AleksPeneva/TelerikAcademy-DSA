@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ChessHorse
 {
 	class Program
-    {
+	{
 		private static int[,] matrix;
 		private static int rows;
 		private static int cols;
@@ -13,11 +13,11 @@ namespace ChessHorse
 		private static int[] outputCol;
 		private static int filledOutputColCells = 0;
 
-		private static int[] rowMovement = { -2, -2, -1, -1, +1, +1, +2, +2};
-		private static int[] colMovement = { -1, +1, -2, +2, -2, +2, -1, +1};
+		private static int[] rowMovement = { -2, -2, -1, -1, +1, +1, +2, +2 };
+		private static int[] colMovement = { -1, +1, -2, +2, -2, +2, -1, +1 };
 
 		static void Main(string[] args)
-        {
+		{
 			rows = int.Parse(Console.ReadLine());
 			cols = int.Parse(Console.ReadLine());
 			startRow = int.Parse(Console.ReadLine());
@@ -53,17 +53,37 @@ namespace ChessHorse
 			{
 				int[] cell = cellsToTraverseFrom.Dequeue();
 
-				if (cell[1] == cols/2)
+				if (cell[1] == cols / 2)
 				{
 					filledOutputColCells++;
 					outputCol[0] = matrix[0, 1];
 				}
 
+				int rowMove;
+				int colMove;
+
 				for (int i = 0; i < 8; i++) // 8 = max moves from single cell
 				{
+					rowMove = rowMovement[i] + cell[0];
+					colMove = colMovement[i] + cell[1];
 
+					if (ValidateCell(rowMove, colMove))
+					{
+						matrix[rowMove, colMove] = matrix[0, 1] + 1;
+						cellsToTraverseFrom.Enqueue(
+							new int[]
+							{
+								startRow, startCol
+							});
+					}
 				}
 			}
+		}
+
+		private static bool ValidateCell(int row, int col)
+		{
+			bool isValid = (row > -1 && row < matrix.GetLength(0)) && (col > -1 && col < matrix.GetLength(1) && (matrix[row, col] != -1));
+			return isValid;
 		}
 	}
 }
