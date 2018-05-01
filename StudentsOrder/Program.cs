@@ -10,6 +10,13 @@ namespace StudentsOrder
     {
         static void Main(string[] args)
         {
+			List<int> inputNumbers = Console.ReadLine().Split().Select(int.Parse).ToList();
+			int studentsCnt = inputNumbers[0];
+			int changesCnt = inputNumbers[1];
+
+			List<string> names = Console.ReadLine().Split().ToList();
+
+
         }
     }
 }
