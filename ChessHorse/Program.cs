@@ -1,18 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ChessHorse
 {
 	class Program
     {
 		private static int[,] matrix;
+		private static int rows;
+		private static int cols;
+		private static int startRow;
+		private static int startCol;
+		private static int[] outputCol;
+		
+
         static void Main(string[] args)
         {
-			int rows = int.Parse(Console.ReadLine());
-			int cols = int.Parse(Console.ReadLine());
-			int startRow = int.Parse(Console.ReadLine());
-			int startCol = int.Parse(Console.ReadLine());
+			rows = int.Parse(Console.ReadLine());
+			cols = int.Parse(Console.ReadLine());
+			startRow = int.Parse(Console.ReadLine());
+			startCol = int.Parse(Console.ReadLine());
 
-			int[] outputCol = new int[rows];
+			outputCol = new int[rows];
 			matrix = new int[rows, cols];
 
 			BFS();
@@ -30,7 +38,7 @@ namespace ChessHorse
 
 		private static void BFS()
 		{
-			throw new NotImplementedException();
+			
 		}
 	}
 }
