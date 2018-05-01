@@ -56,7 +56,7 @@ namespace GirlsGoneWild
 
 					string permElement = $"{i}{letters[j]}";
 					combo[elementsCount] = permElement;
-					letterRepetitions[letters[i]]--;
+					letterRepetitions[letters[j]]--;
 					Permutations(j + 1, elementsCount + 1);
 				}
 			}
