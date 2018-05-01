@@ -13,7 +13,10 @@ namespace ChessHorse
 		private static int[] outputCol;
 		private static int filledOutputColCells = 0;
 
-        static void Main(string[] args)
+		private static int[] rowMovement = { -2, -2, -1, -1, +1, +1, +2, +2};
+		private static int[] colMovement = { -1, +1, -2, +2, -2, +2, -1, +1};
+
+		static void Main(string[] args)
         {
 			rows = int.Parse(Console.ReadLine());
 			cols = int.Parse(Console.ReadLine());
@@ -50,10 +53,15 @@ namespace ChessHorse
 			{
 				int[] cell = cellsToTraverseFrom.Dequeue();
 
-				if (cell[0] == cols/2)
+				if (cell[1] == cols/2)
 				{
 					filledOutputColCells++;
 					outputCol[0] = matrix[0, 1];
+				}
+
+				for (int i = 0; i < 8; i++) // 8 = max moves from single cell
+				{
+
 				}
 			}
 		}
