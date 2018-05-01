@@ -47,6 +47,11 @@ namespace Portals
 
 		private static void FindMaxMight(int row, int col)
 		{
+			if (visited[row, col])
+			{
+				return;
+			}
+
 			int might = matrix[row, col];
 
 			if (!AbleToTeleport(row, col, might))
