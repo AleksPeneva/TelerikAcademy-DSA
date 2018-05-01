@@ -1,15 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Portals
 {
-    class Program
+	class Program
     {
-        static void Main(string[] args)
+		private static int[,] matrix;
+		private static bool[,] visited;
+		private static int maxMight;
+
+		static void Main(string[] args)
         {
-        }
+			int[] startPos = Console.ReadLine().Split().Select(int.Parse).ToArray();
+			int[] size = Console.ReadLine().Split().Select(int.Parse).ToArray();
+			int rows = size[0];
+			int cols = size[1];
+			FillMatrix(rows, cols);
+		}
+
+		private static void FillMatrix(int rows, int cols)
+		{
+			matrix = new int[rows, cols];
+			visited = new bool[rows, cols];
+			for (int row = 0; row < rows; row++)
+			{
+				string[] curRow = Console.ReadLine().Split();
+
+				for (int col = 0; col < cols; col++)
+				{
+					if (!int.TryParse(curRow[col], out matrix[row, col]))
+					{
+						matrix[row, col] = -1;
+					}
+				}
+			}
+		}
     }
 }
