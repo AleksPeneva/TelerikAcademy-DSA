@@ -49,14 +49,14 @@ namespace ChessHorse
 				});
 			matrix[startRow, startCol] = 1; //just at start, dw
 
-			while ((cellsToTraverseFrom.Count != 0) && ())
+			while ((cellsToTraverseFrom.Count != 0) && (filledOutputColCells < rows))
 			{
 				int[] cell = cellsToTraverseFrom.Dequeue();
 
 				if (cell[1] == cols / 2)
 				{
 					filledOutputColCells++;
-					outputCol[0] = matrix[0, 1];
+					outputCol[cell[0]] = matrix[cell[0], cell[1]];
 				}
 
 				int rowMove;
