@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
+using System.Text;
 
 namespace ConnectAllCities
 {
@@ -7,6 +8,7 @@ namespace ConnectAllCities
 	{
 		private static int[,] initialCityConnections;
 		private static int totalEdges = 0;
+		private static StringBuilder output = new StringBuilder();
 		static void Main(string[] args)
 		{
 			int numberOfTests = int.Parse(Console.ReadLine());
@@ -14,6 +16,8 @@ namespace ConnectAllCities
 			{
 				Test();
 			}
+
+			Console.Write(output);
 		}
 
 		private static void Test()
@@ -21,7 +25,7 @@ namespace ConnectAllCities
 			int minTransformations;
 			int numberOfCities = int.Parse(Console.ReadLine());
 			FillMatrix(numberOfCities);
-			if (GraphIsConnected())
+			if (CountComponents(numberOfCities, initialCityConnections) == 1)
 			{
 				minTransformations = 0;
 			}
@@ -37,43 +41,49 @@ namespace ConnectAllCities
 				}
 			}
 
-			Console.WriteLine(minTransformations);
+			output.AppendLine(minTransformations.ToString());
 		}
 
-		public static bool GraphIsConnected()
+		private static int CountComponents(int n, int[,] initialCityConnections)
 		{
+			int count = 0;
+			var visited = new bool[n];
+			var dict = new Dictionary<int, List<int>>();
+			for (int i = 0; i < n; i++)
+			{
+				dict[i] = new List<int>();
+			}
 
-			// For each node..
 			for (int i = 0; i < initialCityConnections.GetLength(0); i++)
 			{
-				// Assume it's not connected unless shown otherwise.
-				bool nodeIsConnected = false;
+				var from = initialCityConnections[i, 0];
+				var to = initialCityConnections[i, 1];
 
-				// Check the column and row at the same time:
-				for (int j = 0; j < initialCityConnections.GetLength(1); j++)
-				{
-					if (initialCityConnections[i, j] != 0 || initialCityConnections[j, i] != 0)
-					{
-						// It was non-zero; must have at least one connection.
-						nodeIsConnected = true;
-						break;
-					}
-					if (initialCityConnections[i, j] == 1)
-					{
-						totalEdges++;
-					}
-				}
-
-				// Is the current node connected?
-				if (!nodeIsConnected)
-				{
-					return false;
-				}
-
+				dict[from].Add(to);
+				dict[to].Add(from);
 			}
-			totalEdges /= 2;
-			// All ok otherwise:
-			return true;
+
+			for (int i = 0; i < n; i++)
+			{
+				if (!visited[i])
+				{
+					CountComponentsHelper(n, dict, i, visited);
+					count++;
+				}
+			}
+
+			return count;
+		}
+		private static void CountComponentsHelper(int n, Dictionary<int, List<int>> dict, int cur, bool[] visited)
+		{
+			if (visited[cur]) return;
+
+			visited[cur] = true;
+
+			foreach (var edge in dict[cur])
+			{
+				CountComponentsHelper(n, dict, edge, visited);
+			}
 		}
 
 		private static void FillMatrix(int numberOfCities)
@@ -81,18 +91,18 @@ namespace ConnectAllCities
 			initialCityConnections = new int[numberOfCities, numberOfCities];
 			for (int i = 0; i < numberOfCities; i++)
 			{
-				string input = Console.ReadLine();
-				int[] line = new int[input.Length];
-				for (int k = 0; k < input.Length; k++)
-				{
-					line[i] = (int)Char.GetNumericValue(input[i]);
-				}
+				char[] input = Console.ReadLine().ToCharArray();
 
 				for (int j = 0; j < numberOfCities; j++)
 				{
-					initialCityConnections[i, j] = line[j];
+					initialCityConnections[i, j] = Convert.ToInt32(input[j]) - 48;
+					if (initialCityConnections[i, j] == 1)
+					{
+						totalEdges++;
+					}
 				}
 			}
+			totalEdges /= 2;
 		}
 	}
 }
