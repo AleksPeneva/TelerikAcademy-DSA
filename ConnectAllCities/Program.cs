@@ -31,7 +31,7 @@ namespace ConnectAllCities
 			}
 			else
 			{
-				if (totalEdges % 2 == 0)
+				if (totalEdges < numberOfCities - 1)
 				{
 					minTransformations = -1;
 				}
@@ -40,7 +40,7 @@ namespace ConnectAllCities
 					minTransformations = 1;
 				}
 			}
-
+			totalEdges = 0;
 			output.AppendLine(minTransformations.ToString());
 		}
 
